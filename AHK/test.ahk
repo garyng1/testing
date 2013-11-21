@@ -15,12 +15,11 @@ _strWebHotKeys := ""
 _strWebHotKeysArray := ""
 
 readSettings()
-getDomainURL(asd)
 
 ^!+n::
 {
 	getUserInput(UserInput)
-
+	getDomainURL(UserInput)
 	if UserInput = google
 		;Run www.google.com
 		showNotification("Launching www.google.com with default browser")
@@ -78,16 +77,15 @@ getUserInput(ByRef outputVar)
 
 readSettings()
 {
-	global ;assume global
+	global _strWebHotKeys
 	IniRead, _strWebHotKeys, settings.ini, HotKeyWeb, Domain
-
-	;Split string
-	StringSplit, _strWebHotKeysArray, _strWebHotKeys, `,
-	MsgBox, %_strWebHotKeysArray0%
 }
 
 getDomainURL(domain)
 {
-	global _strWebHotKeysArray
-	MsgBox, % _strWebHotKeysArray0
+	global _strWebHotKeys
+	IfInString, _strWebHotKeys, %domain%
+	{
+		
+	}
 }
